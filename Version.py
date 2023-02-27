@@ -1,10 +1,7 @@
-import requests,re
-content = requests.get("https://sourabhkv.github.io/ytdl/")
-content.close()
-all_num = (re.findall(r'\d\d\.\d\d\d\d\.\d\d',content.text))
-print(all_num,type(all_num[0]))
-z=[]
-for i in range(len(all_num)):
-    z.append(int((re.findall("\d+",all_num[i])[0])+(re.findall("\d+",all_num[i])[1])+(re.findall("\d+",all_num[i])[2])))
-
-print(z)
+import requests
+url = "https://api.github.com/repos/sourabhkv/ytdl/releases/latest"
+r = requests.get(url)
+if r.status_code==200:
+    latest_ver = r.json()["tag_name"]
+    intver = int(latest_ver[1:].replace(".",""))
+    print(latest_ver, intver)
